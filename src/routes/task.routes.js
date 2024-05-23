@@ -6,7 +6,7 @@ const TaskModel = require("../models/task.model");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  return new TaskController(req, res).getTask();
+  return new TaskController(req, res).getAll();
 });
 
 router.get("/:id", async (req, res) => {
@@ -14,15 +14,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  try {
-    const newTask = new TaskModel(req.body); // criar uma nova task
-
-    await newTask.save(); // salvar no banco.
-
-    res.status(201).send(newTask);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
+  return new TaskController(req, res).create();
 });
 
 router.patch("/:id", async (req, res) => {

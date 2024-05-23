@@ -6,7 +6,7 @@ class TaskController {
     this.res = res;
   }
 
-  async getTask() {
+  async getAll() {
     try {
       const tasks = await TaskModel.find({});
       this.res.status(200).send(tasks);
@@ -27,7 +27,19 @@ class TaskController {
 
       return this.res.status(200).send(task);
     } catch (error) {
-      res.status(500).send(error.message);
+      this.res.status(500).send(error.message);
+    }
+  }
+
+  async create() {
+    try {
+      const newTask = new TaskModel(this.req.body); // criar uma nova task
+
+      await newTask.save(); // salvar no banco.
+
+      this.res.status(201).send(newTask);
+    } catch (error) {
+      this.res.status(500).send(error.message);
     }
   }
 }
