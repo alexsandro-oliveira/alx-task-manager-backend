@@ -13,5 +13,5 @@ connectToDatabase();
 
 app.use("/tasks", TaskRouter);
 
-const PORT = 8000;
-app.listen(PORT, () => console.log(`Listening on port: ${PORT}!`));
+const port = process.env.PORT || 8000;
+app.listen(port, () => console.log(`Listening on port: ${port}!`));
